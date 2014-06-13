@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<widget id="co.helloben.knowledge" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    
+    <name>Knowledge</name>
+    <description>
+        What did you learn today?
+    </description>
+    <author email="ben@helloben.co" href="http://knowledge.helloben.co/">
+        Knowledge Team
+    </author>
+    <feature name="http://api.phonegap.com/1.0/device" />
+    <preference name="permissions" value="none" />
+    <preference name="orientation" value="portrait" />
+    <preference name="target-device" value="universal" />
+    <preference name="fullscreen" value="false" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="stay-in-webview" value="false" />
+    <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+    <preference name="show-splash-screen-spinner" value="true" />
+    <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="disable-cursor" value="false" />
+    <preference name="android-minSdkVersion" value="7" />
+    <preference name="android-installLocation" value="auto" />
+    
+    <icon src="icon.png" />
+
+    <access origin="*" />
+    
+    <gap:plugin name="com.phonegap.plugins.pushplugin" version="2.1.1" />
+    
+</widget>
