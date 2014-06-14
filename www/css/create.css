@@ -50,5 +50,18 @@ width: 100%;
     margin-left: 10px;   
 }
 
+#knowledge {
+    resize: none;
+    height: 50%;
+    width: 25%;
+    border: none;
+    border-bottom: 1px solid grey;
+}
+
+#tags{
+    width: 25%;
+    border: none;
+
+}
 
 * { box-sizing: border-box }
