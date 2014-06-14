@@ -61,7 +61,7 @@ html, body{
 #tags{
     width: 75%;
     border: none;
-
+    height: 20%;
 }
 
 * { box-sizing: border-box }
