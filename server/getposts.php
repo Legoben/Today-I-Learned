@@ -3,15 +3,11 @@
     function getDist($json1,$json2){
         $j1 = json_decode($json1);
         $x1 = $j1->latitude;
-        '<br/>';
         $y1 = $j1->longitude;
-        '<br/>';
         
         $j2 = json_decode($json2);
         $x2 = $j2->latitude;
-        '<br/>';
         $y2 = $j2->longitude;
-        '<br/>';
         
         return sqrt( pow(($x2 - $x1), 2) + pow(($y2 - $y1), 2) );
         
