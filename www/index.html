@@ -11,7 +11,15 @@
     <div class="userInput" style="position:fixed; bottom:45%; left:45%;" ><input id="username" style="margin-right:auto;margin-left:auto;border: white 1px solid; border-radius: 1em; background: rgba (255,255,255,0.5);" placeholder="Username ..." /> <button style="margin-right:auto;margin-left:auto;border: white 1px solid; border-radius:0.5em;" onclick="login()">Login!</button></div>
 
     <script src="js/jquery.js"></script>
+    <script src="phonegap.js"></script>
     <script>
+        $("#username").keypress(function (e) {
+            if (e.which == 13) {
+            login();   
+            }
+        });
+
+
         function uniqid(prefix, more_entropy) {
             // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
             //  revised by: Kankrelune (http://www.webfaktory.info/)
@@ -58,25 +66,25 @@
             return retId;
         }
 
-        function login(){
+        function login() {
             var user = $('#username').val();
-            
-            if(user == ''){
+
+            if (user == '') {
                 return;
                 //ToDo: Make error
             }
-            
+
             localStorage.setItem("username", user);
             localStorage.setItem("uid", uniqid());
-            
+
             window.location = "dashboard.html";
         }
-        
+
         if (localStorage.getItem("username") == '' || localStorage.getItem("username") == undefined || localStorage.getItem("uid") == '' || localStorage.getItem("uid") == undefined) {
             //Do Stuff
         } else {
             window.location = "dashboard.html"; //User is logged in take 'em to dashboard
-            
+
         }
     </script>
 </body>

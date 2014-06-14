@@ -45,28 +45,50 @@
 
     if(!isset($_GET['by'])){
         die('by');
-    } elseif($_GET['by'] == 'id'){ // GET BY ID & ID = POST ID
+    } elseif($_GET['by'] == 'id'){ // GET BY ID & POST ID = POST ID
         
-        if(!isset($_GET['id'])){
+        if(!isset($_POST['id'])){
             die('missing');   
         }
-        $id = mysql_real_escape_string($_GET['id']);
-        $query = "SELECT * FROM posts WHERE id = $id";
-        $res = mysql_query($query);
         
+        
+        $total = '(';
+        foreach($_POST['id'] as $pid){
+            $total .= "'$pid', ";
+        }
+        
+        $total = rtrim($total, ', ');
+        
+        $total .= ')';
+        
+        
+        
+        $query = "SELECT * FROM posts WHERE id in $total";
+        $res = mysql_query($query);
+            
         echo resToJSON($res);
+    
     } elseif($_GET['by'] == 'all'){ // GET BY ALL
         
         $query = "SELECT * FROM posts LIMIT 50";
         $res = mysql_query($query);
         echo resToJSON($res);
     } elseif($_GET['by'] == 'user'){ // GET BY USER & USERID = USERID
-        if(!isset($_GET['userid'])){
+        if(!isset($_POST['userid'])){
             die('missing');   
         }
         
-        $id = mysql_real_escape_string($_GET['userid']);
-        $query = "SELECT * FROM posts WHERE userid = '$id' LIMIT 50";
+        
+        $total = '(';
+        foreach($_POST['userid'] as $pid){
+            $total .= "'$pid', ";
+        }
+        
+        $total = rtrim($total, ', ');
+        
+        $total .= ')';
+        
+        $query = "SELECT * FROM posts WHERE userid in $total";
         $res = mysql_query($query);
         
         echo resToJSON($res);   
@@ -74,6 +96,8 @@
         if(!isset($_POST['geo'])){
             die('missing');   
         }
+        
+        
         
         $mgeo = $_POST['geo'];
         
