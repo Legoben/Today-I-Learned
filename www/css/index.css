@@ -1,3 +1,15 @@
 body {
-	background-image: url('../res/background/hd-beach-sunset-wallpapers.jpg');
+	background-image: url('../res/background/index.jpg');
+	background-repeat: no-repeat;
+}
+.userInput {
+	float: center;
+	margin-left: auto;
+	margin-right: auto;
+	color: green;
+}
+#username {
+	float: center;
+	margin-left: auto;
+	margin-right: auto;
 }
