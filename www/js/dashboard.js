@@ -32,7 +32,7 @@ var populate = function() {
 
 function makeList(){
     $('#listings').empty();
-    for (var i = 1; i < json.length + 1 ; i++) {
+    for (var i = 0; i < json.length ; i++) {
         var listing = "<li id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
         $('#listings').prepend(listing);
     }
@@ -63,9 +63,8 @@ function getUser(uid){
 
 function getGeo(){
     var data;
-    $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=geo", data:{"geo":pos}, type:"post", success:function(d){data = d}})
+    $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=geo", data:{"geo":pos}, type:"post", success:function(d){data = d;console.log(d)}})
     return data;   
-    makeList();
 }
 
 function getTag(tag){
@@ -76,10 +75,12 @@ function getTag(tag){
 }
 
 function loadAll(){
-    json = getAll();
-    
     $('#listings').empty();
-    for (var i = 1; i < json.length + 1 ; i++) {
+    
+    var json = getAll();
+    
+    
+    for (var i = 0; i < json.length ; i++) {
         var listing = "<li style='display:none;' id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
         $('#listings').prepend(listing);
         $('#' + i).fadeIn();
@@ -88,10 +89,12 @@ function loadAll(){
 }
 
 function loadGeo(){
-    json = getGeo();
-    
     $('#listings').empty();
-    for (var i = 1; i < json.length + 1 ; i++) {
+    
+    var json = getGeo();
+    
+    
+    for (var i = 0; i < json.length; i++) {
         var listing = "<li style='display:none;' id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
         $('#listings').prepend(listing);
         $('#' + i).fadeIn();
@@ -106,7 +109,19 @@ function loadFollowing(){
 }
 
 function loadSearch(){
-       
+        $('#listings').html("<li style='display:none;' id='search-hold'><input id='search-text'><button onclick='doSearch()'>Search!</button></li>");
+        $('#search-hold').fadeIn();
+}
+
+function doSearch(){
+    var tag = $('#search-text').val();
+    var json = getTag(tag)
+    console.log('tag',json)
+    for (var i = 0; i < json.length; i++) {
+        var listing = "<li style='display:none;' id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
+        $('#listings').append(listing);
+        $('#' + i).fadeIn();
+    }
 }
 
 function loadFavorites(){
