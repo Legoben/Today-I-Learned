@@ -97,7 +97,17 @@ function loadGeo(){
 }
 
 function loadFollowing(){
+    $('#listings').empty();
     
+    var j = JSON.parse(localStorage.getItem('following'))
+    var json = getUser(j);
+    json = json.responseJSON;
+    
+    for (var i = 0; i < json.length; i++) {
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
+        $('#listings').prepend(listing);
+        $('#' + i).fadeIn();
+    }
        
 }
 
@@ -109,7 +119,13 @@ function followUser(uid){
     
     var j = JSON.parse(localStorage.getItem('following'))
     console.log(j);
-    j.push(uid);
+    if($.inArray(uid) == -1){
+        j.push(uid);
+        $('.follow-button').text('Unfollow')
+    } else {
+        j.splice($.inArray(uid));
+        $('.follow-button').text('Follow')
+    }
     localStorage.setItem('following', JSON.stringify(j));
     
 }
@@ -122,6 +138,7 @@ function loadUser(uid){
     
     console.log(uid,json)
     
+    var j = JSON.parse(localStorage.getItem('following'))
     
     for (var i = 0; i < json.length; i++) {
         console.log('Hayo')
@@ -129,9 +146,11 @@ function loadUser(uid){
         $('#listings').prepend(listing);
         $('#' + i).fadeIn();
     }
-    
-    $('#listings').prepend("<button class='follow-button' onclick='followUser(\""+json[0].userid+"\")'>Follow "+json[0].username+"</button><br><br>");
-
+    if($.inArray(json[0].userid) == -1){
+        $('#listings').prepend("<button class='follow-button' onclick='followUser(\""+json[0].userid+"\")'>Follow "+json[0].username+"</button><br><br>");
+    } else {
+        $('#listings').prepend("<button class='follow-button' onclick='followUser(\""+json[0].userid+"\")'>Unfollow "+json[0].username+"</button><br><br>");
+    }
 }
 
 function loadSearch(){
