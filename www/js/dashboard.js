@@ -1,4 +1,3 @@
-var json = [{"id":"3","username":"Ben","userid":"539b8d2092d6c","text":"Test","tags":"Test,tester","geoloc":"{\"latitude\":29.5083464,\"longitude\":-98.394077}","likedby":"0","example":""},{"id":"4","username":"Ben2","userid":"539be1a799fec","text":"Firmmmmmmmmmmst Test","tags":"tnk","geoloc":"{\"latitude\":29.508391300000003,\"longitude\":-98.3940331}","likedby":"0","example":""},{"id":"5","username":"Ben2","userid":"539be1a799fec","text":"agweigwk Test","tags":"tnk","geoloc":"{\"latitude\":29.508372299999998,\"longitude\":-98.3941035}","likedby":"0","example":""}]
 var pos;
 var loc;
 
@@ -21,6 +20,9 @@ var populate = function() {
     
     getLocation();
     
+    json = getAll();
+
+    
     $('#listings').empty();
     for (var i = 1; i < json.length + 1 ; i++) {
         var listing = "<li id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
@@ -41,7 +43,6 @@ function getAll(){
     var data;
     $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=all", success:function(d){data = d}})
     return data;
-    makeList();
 }
 
 
@@ -74,6 +75,43 @@ function getTag(tag){
     makeList();
 }
 
+function loadAll(){
+    json = getAll();
+    
+    $('#listings').empty();
+    for (var i = 1; i < json.length + 1 ; i++) {
+        var listing = "<li style='display:none;' id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
+        $('#listings').prepend(listing);
+        $('#' + i).fadeIn();
+        
+    }
+}
+
+function loadGeo(){
+    json = getGeo();
+    
+    $('#listings').empty();
+    for (var i = 1; i < json.length + 1 ; i++) {
+        var listing = "<li style='display:none;' id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
+        $('#listings').prepend(listing);
+        $('#' + i).fadeIn();
+    }
+    
+       
+}
+
+function loadFollowing(){
+    
+       
+}
+
+function loadSearch(){
+       
+}
+
+function loadFavorites(){
+       
+}
 
 
 window.onload = populate;

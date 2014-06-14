@@ -44,6 +44,12 @@ Night #c644fc↓#5856d6
 	width: auto;
 	min-width: 19%;
 	text-align: center;
+    cursor: pointer;
+}
+
+.header-tab:hover{
+    background-color: gray;
+    
 }
 #header {
 	width: 100%;
@@ -55,8 +61,8 @@ ul {
 #create {
     position: fixed;
     bottom: 0%;
+    
 }
 #tab-geo, #tab-user, #tab-tag, #tab-fav {
     border-left: 1px solid grey;
 }
-body{ background-image: url('../res/background/salmon.jpg');
