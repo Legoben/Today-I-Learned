@@ -43,16 +43,17 @@ function getAll(){
 }
 
 
-function getSingleID(id){
+function getID(ids){
     var data;
-    $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=id&id="+id, success:function(d){data = d}})
+    $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=id", data: {'id':ids}, type: 'post', complete:function(d){data = d;console.log(d)}})
     return data;
     makeList();
 }
 
 function getUser(uid){
     var data;
-    $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=user&userid="+uid, success:function(d){data = d}})
+    $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=user", data: {'userid':uid}, type: 'post', complete:function(d){data = d;console.log(d)}})
+
     return data;
     makeList();
 }
