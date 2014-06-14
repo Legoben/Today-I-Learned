@@ -26,3 +26,6 @@ textarea {
 button {
 	border: none;
 }
+body {
+	background-image: url('../res/background/sunset.jpg');
+	}
