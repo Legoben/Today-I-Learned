@@ -1,3 +1,4 @@
+
 html, body{
     padding: 0;
     margin: 0;
@@ -6,6 +7,22 @@ html, body{
     overflow: hidden;
 }
 
+body {
+	background-image: url('../res/background/index.jpg');
+	background-repeat: no-repeat;
+}
+
+.userInput {
+	float: center;
+	margin-left: auto;
+	margin-right: auto;
+	color: green;
+}
+#username {
+	float: center;
+	margin-left: auto;
+	margin-right: auto;
+}
 /*
 Afternoon #ff9500↓#ff5e3a
 

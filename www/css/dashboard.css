@@ -59,3 +59,4 @@ ul {
 #tab-geo, #tab-user, #tab-tag, #tab-fav {
     border-left: 1px solid grey;
 }
+body{ background-image: url('../res/background/salmon.jpg');
