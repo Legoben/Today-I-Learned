@@ -38,7 +38,7 @@ function makeList(){
 
 function getAll(){
     var data;
-    $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=all", success:function(d){data = d}})
+    $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=all", success:function(d){data = d}})
     return data;
     makeList();
 }
@@ -46,28 +46,28 @@ function getAll(){
 
 function getSingleID(id){
     var data;
-    $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=id&id="+id, success:function(d){data = d}})
+    $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=id&id="+id, success:function(d){data = d}})
     return data;
     makeList();
 }
 
 function getUser(uid){
     var data;
-    $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=user&userid="+uid, success:function(d){data = d}})
+    $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=user&userid="+uid, success:function(d){data = d}})
     return data;
     makeList();
 }
 
 function getGeo(){
     var data;
-    $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=geo", data:{"geo":pos}, type:"post", success:function(d){data = d}})
+    $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=geo", data:{"geo":pos}, type:"post", success:function(d){data = d}})
     return data;   
     makeList();
 }
 
 function getTag(tag){
     var data;
-    $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=tag&tag="+tag, success:function(d){data = d}})
+    $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=tag&tag="+tag, success:function(d){data = d}})
     return data;
     makeList();
 }

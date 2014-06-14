@@ -2,7 +2,6 @@ var pos;
 var loc;
 
 window.onload = function(){
-    var tmp = {}
     loc = getLocation();
     //console.log(loc)
     //pos = JSON.stringify({"latitude":loc['coords'].latitude, "longitude":loc.coords.longitude})
@@ -16,7 +15,7 @@ function submit() {
     
     var d = {"text":text, "tags":tags,"username":localStorage.getItem("username"),"userid":localStorage.getItem("uid"), "geoloc":pos}
     
-    $.ajax({"url":"http://localhost/SoHacksProject/server/makepost.php", data:d, type:"POST", success:function(d){ console.log(d); }})
+    $.ajax({"url":"http://til.helloben.co/server/makepost.php", data:d, type:"POST", success:function(d){ console.log(d); }})
 }
 
 function getLocation() { //Get the user's GeoLocation
