@@ -21,7 +21,7 @@ var populate = function() {
     
     getLocation();
     
-    $('#listings')="";
+    $('#listings').empty();
     for (var i = 1; i < json.length + 1 ; i++) {
         var listing = "<li id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
         $('#listings').prepend(listing);
@@ -29,7 +29,7 @@ var populate = function() {
 }
 
 function makeList(){
-    $('#listings')="";
+    $('#listings').empty();
     for (var i = 1; i < json.length + 1 ; i++) {
         var listing = "<li id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
         $('#listings').prepend(listing);
