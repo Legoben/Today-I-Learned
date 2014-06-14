@@ -26,7 +26,7 @@ var populate = function() {
 function makeList(){
     $('#listings').empty();
     for (var i = 0; i < json.length ; i++) {
-        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'><button onClick=\"userFavorite\">Subscribe</button>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
         $('#listings').prepend(listing);
     }
     console.log("it wurked");
