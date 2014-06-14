@@ -8,10 +8,25 @@
 </head>
 
 <body>
-    <input id="username" placeholder="Username ..." /> <button onclick="login()">Login!</button>
+    <div id="header" class="afternoon"></div>
+
+    Welcome to "Today I Learned."
+    <br> <small>Please Enter a username</small> 
+    <br>
+    <br>
+
+    <input id="username" placeholder="Username ..." />
+    <button onclick="login()">Login!</button>
 
     <script src="js/jquery.js"></script>
     <script>
+        $("#username").keypress(function (e) {
+            if (e.which == 13) {
+            login();   
+            }
+        });
+
+
         function uniqid(prefix, more_entropy) {
             // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
             //  revised by: Kankrelune (http://www.webfaktory.info/)
@@ -58,25 +73,25 @@
             return retId;
         }
 
-        function login(){
+        function login() {
             var user = $('#username').val();
-            
-            if(user == ''){
+
+            if (user == '') {
                 return;
                 //ToDo: Make error
             }
-            
+
             localStorage.setItem("username", user);
             localStorage.setItem("uid", uniqid());
-            
+
             window.location = "dashboard.html";
         }
-        
+
         if (localStorage.getItem("username") == '' || localStorage.getItem("username") == undefined || localStorage.getItem("uid") == '' || localStorage.getItem("uid") == undefined) {
             //Do Stuff
         } else {
             window.location = "dashboard.html"; //User is logged in take 'em to dashboard
-            
+
         }
     </script>
 </body>
