@@ -91,3 +91,10 @@ li{
     font-weight: 700;
     font-size: 18px;
 }
+
+.follow-button {
+    border: 4px #FF7519 solid;
+    border-radius: 1em;
+    background: #FF7519;
+    color: white;
+}
