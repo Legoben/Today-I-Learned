@@ -15,7 +15,7 @@ function submit() {
     
     var d = {"text":text, "tags":tags,"username":localStorage.getItem("username"),"userid":localStorage.getItem("uid"), "geoloc":pos}
     
-    $.ajax({"url":"http://til.helloben.co/server/makepost.php", data:d, type:"POST", success:function(d){ console.log(d); }})
+    $.ajax({"url":"http://til.helloben.co/server/makepost.php", data:d, type:"POST", success:function(d){console.log(d); document.location = "dashboard.html"}})
 }
 
 function getLocation() { //Get the user's GeoLocation

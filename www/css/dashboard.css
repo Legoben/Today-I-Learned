@@ -66,3 +66,15 @@ ul {
 #tab-geo, #tab-user, #tab-tag, #tab-fav {
     border-left: 1px solid grey;
 }
+
+.dude{
+    text-decoration: underline;
+} 
+
+li{
+    cursor: pointer;
+}
+
+.hidden{
+    display: none;   
+}

@@ -20,20 +20,13 @@ var populate = function() {
     
     getLocation();
     
-    json = getAll();
-
-    
-    $('#listings').empty();
-    for (var i = 1; i < json.length + 1 ; i++) {
-        var listing = "<li id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
-        $('#listings').prepend(listing);
-    };
+    loadAll()
 }
 
 function makeList(){
     $('#listings').empty();
     for (var i = 0; i < json.length ; i++) {
-        var listing = "<li id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
         $('#listings').prepend(listing);
     }
     console.log("it wurked");
@@ -81,7 +74,7 @@ function loadAll(){
     
     
     for (var i = 0; i < json.length ; i++) {
-        var listing = "<li style='display:none;' id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
         $('#listings').prepend(listing);
         $('#' + i).fadeIn();
         
@@ -95,7 +88,7 @@ function loadGeo(){
     
     
     for (var i = 0; i < json.length; i++) {
-        var listing = "<li style='display:none;' id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
         $('#listings').prepend(listing);
         $('#' + i).fadeIn();
     }
@@ -108,6 +101,19 @@ function loadFollowing(){
        
 }
 
+function loadUser(uid){
+     $('#listings').empty();
+    
+    var json = getUser([uid]);
+    
+    
+    for (var i = 0; i < json.length; i++) {
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
+        $('#listings').prepend(listing);
+        $('#' + i).fadeIn();
+    }
+}
+
 function loadSearch(){
         $('#listings').html("<li style='display:none;' id='search-hold'><input id='search-text'><button onclick='doSearch()'>Search!</button></li>");
         $('#search-hold').fadeIn();
@@ -118,7 +124,8 @@ function doSearch(){
     var json = getTag(tag)
     console.log('tag',json)
     for (var i = 0; i < json.length; i++) {
-        var listing = "<li style='display:none;' id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><hr></li>";
+              
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
         $('#listings').append(listing);
         $('#' + i).fadeIn();
     }
@@ -126,6 +133,11 @@ function doSearch(){
 
 function loadFavorites(){
        
+}
+
+function slide(num){
+    console.log('Hai', num)
+    $('.hidden', '#'+num).slideToggle();   
 }
 
 
