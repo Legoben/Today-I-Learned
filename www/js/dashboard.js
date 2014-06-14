@@ -24,16 +24,23 @@ var populate = function() {
     
 
     for (var i = 0; i < json.length ; i++) {
-        var listing = "<li id=\"" + i + "\">Today I learned <span class=\"content\" id=\"til" + i + "\">that every day is Caturday!<a href=\"http://thecatapi.com\"><img src=\"http://thecatapi.com/api/images/get?format=src&type=gif\"></a></span><hr></li>";
+        var listing = "<li id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + $.parseJSON("text") + "</span><hr></li>";
         $('#listings').prepend(listing);
     };
 }
 
+function makeList(){
+    for (var i = 0; i < json.length ; i++) {
+        var listing = "<li id=\"" + i + "\"><span class=\"content\" id=\"til" + i + "\">" + $.parseJSON("text") + "</span><hr></li>";
+        $('#listings').prepend(listing);
+    }
+}
 
 function getAll(){
     var data;
     $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=all", success:function(d){data = d}})
     return data;
+    makeList();
 }
 
 
@@ -41,24 +48,30 @@ function getSingleID(id){
     var data;
     $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=id&id="+id, success:function(d){data = d}})
     return data;
+    makeList();
 }
 
 function getUser(uid){
     var data;
     $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=user&userid="+uid, success:function(d){data = d}})
     return data;
+    makeList();
 }
 
 function getGeo(){
     var data;
     $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=geo", data:{"geo":pos}, type:"post", success:function(d){data = d}})
     return data;   
+    makeList();
 }
 
 function getTag(tag){
     var data;
     $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=tag&tag="+tag, success:function(d){data = d}})
     return data;
+    makeList();
 }
+
+
 
 window.onload = populate;
