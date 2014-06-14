@@ -41,14 +41,14 @@ function getAll(){
 
 function getID(ids){
     var data;
-    $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=id", data: {'id':ids}, type: 'post', complete:function(d){data = d;console.log(d)}})
+    $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=id", data: {'id':ids}, type: 'post', complete:function(d){data = d;console.log(d)}})
     return data;
     makeList();
 }
 
 function getUser(uid){
     var data;
-    $.ajax({async: false, url:"http://localhost/SoHacksProject/server/getposts.php?by=user", data: {'userid':uid}, type: 'post', complete:function(d){data = d;console.log(d)}})
+    $.ajax({async: false, url:"http://til.helloben.co/server/getposts.php?by=user", data: {'userid':uid}, type: 'post', complete:function(d){data = d;console.log(d)}})
 
     return data;
     makeList();
@@ -101,17 +101,37 @@ function loadFollowing(){
        
 }
 
+
+function followUser(uid){
+    if(localStorage.getItem('following') == '' || localStorage.getItem('following') == undefined){
+        localStorage.setItem('following', '[]');  
+    }
+    
+    var j = JSON.parse(localStorage.getItem('following'))
+    console.log(j);
+    j.push(uid);
+    localStorage.setItem('following', JSON.stringify(j));
+    
+}
+
 function loadUser(uid){
      $('#listings').empty();
-    
+
     var json = getUser([uid]);
+    json = json.responseJSON;
+    
+    console.log(uid,json)
     
     
     for (var i = 0; i < json.length; i++) {
+        console.log('Hayo')
         var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
         $('#listings').prepend(listing);
         $('#' + i).fadeIn();
     }
+    
+    $('#listings').prepend("<button class='follow-button' onclick='followUser(\""+json[0].userid+"\")'>Follow "+json[0].username+"</button><br><br>");
+
 }
 
 function loadSearch(){
@@ -129,6 +149,8 @@ function doSearch(){
         $('#listings').append(listing);
         $('#' + i).fadeIn();
     }
+    
+    
 }
 
 function loadFavorites(){
