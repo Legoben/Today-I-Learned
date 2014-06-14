@@ -39,11 +39,10 @@ Night #c644fc↓#5856d6
     background-image:         linear-gradient(#c644fc, #5856d6) !important;
 }
 .header-tab{
-	display: block;
-	float: left;
-	width: auto;
-	min-width: 19%;
-	text-align: center;
+	display: inline-block;
+    width: auto;
+    min-width: 19%;
+    text-align: center;
     cursor: pointer;
 }
 
@@ -55,6 +54,8 @@ box-shadow: 0px 14px 35px 1px rgba(255,255,255,0.75);
     
 }
 #header {
+    text-align: center;
+	position: fixed;
 	width: 100%;
 	min-height: 2em;
 }
