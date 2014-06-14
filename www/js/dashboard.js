@@ -26,7 +26,7 @@ var populate = function() {
 function makeList(){
     $('#listings').empty();
     for (var i = 0; i < json.length ; i++) {
-        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'><button onClick=\"userFavorite\">Subscribe</button>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". - <span class='like-this' onclick='favPost(\""+json[i].id+"\")'>Favorite this??</span></div><hr></li>";;
         $('#listings').prepend(listing);
     }
     console.log("it wurked");
@@ -74,7 +74,7 @@ function loadAll(){
     
     
     for (var i = 0; i < json.length ; i++) {
-        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". - <span class='like-this' onclick='favPost(\""+json[i].id+"\")'>Favorite this??</span></div><hr></li>";
         $('#listings').prepend(listing);
         $('#' + i).fadeIn();
         
@@ -88,7 +88,7 @@ function loadGeo(){
     
     
     for (var i = 0; i < json.length; i++) {
-        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". - <span class='like-this' onclick='favPost(\""+json[i].id+"\")'>Favorite this??</span></div><hr></li>";
         $('#listings').prepend(listing);
         $('#' + i).fadeIn();
     }
@@ -104,7 +104,7 @@ function loadFollowing(){
     json = json.responseJSON;
     
     for (var i = 0; i < json.length; i++) {
-        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
+       var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". - <span class='like-this' onclick='favPost(\""+json[i].id+"\")'>Favorite this??</span></div><hr></li>";
         $('#listings').prepend(listing);
         $('#' + i).fadeIn();
     }
@@ -130,6 +130,24 @@ function followUser(uid){
     
 }
 
+function favPost(pid){
+    if(localStorage.getItem('faved') == '' || localStorage.getItem('faved') == undefined){
+        localStorage.setItem('faved', '[]');  
+    }
+    
+    var j = JSON.parse(localStorage.getItem('faved'))
+    console.log(j);
+    if($.inArray(pid) == -1){
+        j.push(pid);
+        $('.follow-button').text('Unfollow')
+    } else {
+        j.splice($.inArray(pid));
+        $('.follow-button').text('Follow')
+    }
+    localStorage.setItem('faved', JSON.stringify(j));
+    
+}
+
 function loadUser(uid){
      $('#listings').empty();
 
@@ -142,7 +160,7 @@ function loadUser(uid){
     
     for (var i = 0; i < json.length; i++) {
         console.log('Hayo')
-        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". - <span class='like-this' onclick='favPost(\""+json[i].id+"\")'>Favorite this??</span></div><hr></li>";
         $('#listings').prepend(listing);
         $('#' + i).fadeIn();
     }
@@ -164,7 +182,7 @@ function doSearch(){
     console.log('tag',json)
     for (var i = 0; i < json.length; i++) {
               
-        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". Liked By "+json[i].likedby+"</div><hr></li>";
+        var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". - <span class='like-this' onclick='favPost(\""+json[i].id+"\")'>Favorite this??</span></div><hr></li>";
         $('#listings').append(listing);
         $('#' + i).fadeIn();
     }
@@ -177,13 +195,26 @@ function doSearch(){
     
 }
 
+
+
 function loadFavorites(){
-       
+     $('#listings').empty();
+    
+    var j = JSON.parse(localStorage.getItem('faved'))
+    console.log(j);
+    var json = getID(j);
+    json = json.responseJSON;
+    
+    for (var i = 0; i < json.length; i++) {
+       var listing = "<li style='display:none;' id=\"" + i + "\" onclick='slide("+i+")'><span class=\"content\" id=\"til" + i + "\">" + (json[i].text) + "</span><div class='hidden'> Published by <span class='dude' onclick='loadUser(\""+json[i].userid+"\")'>"+json[i].username +"</span>. Tagged as "+json[i].tags+". - <span class='like-this' onclick='favPost(\""+json[i].id+"\")'>Favorite this??</span></div><hr></li>";
+        $('#listings').prepend(listing);
+        $('#' + i).fadeIn();
+    }
 }
 
 function slide(num){
-    console.log('Hai', num)
-    $('.hidden', '#'+num).slideToggle();   
+    /*console.log('Hai', num)
+    $('.hidden', '#'+num).slideToggle();*/   
 }
 
 
