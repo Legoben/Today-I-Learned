@@ -53,13 +53,13 @@ html, body{
 #knowledge {
     resize: none;
     height: 50%;
-    width: 25%;
+    width: 75%;
     border: none;
     border-bottom: 1px solid grey;
 }
 
 #tags{
-    width: 25%;
+    width: 75%;
     border: none;
 
 }
