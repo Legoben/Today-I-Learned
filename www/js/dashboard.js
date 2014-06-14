@@ -169,6 +169,11 @@ function doSearch(){
         $('#' + i).fadeIn();
     }
     
+    $("#search-text").keypress(function (e) {
+            if (e.which == 13) {
+            doSearch();   
+            }
+        });
     
 }
 
