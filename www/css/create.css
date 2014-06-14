@@ -1,0 +1,22 @@
+#submit {
+
+}
+#tags {
+	width: 100%;
+	max-width: 100%;
+	border: none;
+	min-height: 100px;
+	position: fixed;
+	bottom: 0px;
+	height: 25%
+}
+textarea {
+	resize: none;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid grey;
+	height: 70%;
+}
+button {
+	border: none;
+}

@@ -6,15 +6,12 @@
         <link rel="stylesheet" type="text/css" id="os" href="css/ios.css">
     </head>
     <body>
-        <h1>What did you learn today?</h1>
+        <h1>Write TIL <button id="submit" onclick="submit()">Post</button></h1>
+               
+        <textarea id="knowledge" placeholder="Today I learned..."></textarea>
+        <br>
+        <input id="tags" placeholder="Tags">
         
-        <textarea id="knowledge" placeholder="Type Here ..."></textarea>
-        
-        <input id="tags" placeholder="Tags (Seperated by commas)">
-        
-        <!--<button>Example</button>-->
-        
-        <button id="submit" onclick="submit()"></button>
             
         <script src="js/jquery.js"></script>
         <script src="js/create.js"></script>
